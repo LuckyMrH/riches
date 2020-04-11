@@ -76,4 +76,4 @@
  * Exchange Corporation TW
  *
  */
-package com.sh.riches.dumbstock;
+package com.sh.riches.apiproviders.dumbstock;

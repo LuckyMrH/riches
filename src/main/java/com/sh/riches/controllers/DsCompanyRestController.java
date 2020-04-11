@@ -5,7 +5,12 @@
  */
 package com.sh.riches.controllers;
 
-import java.util.List;
+import com.sh.riches.entities.DsCompany;
+import com.sh.riches.repositories.DsCompanyRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.Link;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +26,41 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Steve
  */
 @RestController
-@RequestMapping("/url")
+@RequestMapping("/company")
 public class DsCompanyRestController {
 
-    @GetMapping()
-    public List<Object> list() {
-        return null;
+    @Autowired
+    DsCompanyRepository coRepo;
+
+//    @GetMapping("/list")
+//    public Resources<Resource<DsCompany>> list() {
+//        List<Resource<DsCompany>> companies = coRepo.findAll().stream()
+//                .map(company -> new Resource<>(company,
+//                linkTo(methodOn(DsCompanyRestController.class).one(company.getId())).withSelfRel(),
+//                linkTo(methodOn(DsCompanyRestController.class).all()).withRel("companies")))
+//                .collect(Collectors.toList());
+//
+//        return new Resources<>(companies,
+//                linkTo(methodOn(DsCompanyRestController.class).all()).withSelfRel());
+//    }
+    @GetMapping(value = "/list", produces = {"application/hal+json"})
+    public CollectionModel<DsCompany> getAllDsCompany() {
+        Iterable<DsCompany> allCompanies = coRepo.findAll();
+
+        for (DsCompany company : allCompanies) {
+            String companyId = company.getId().toString();
+            Link selfLink = linkTo(DsCompanyRestController.class).slash(companyId).withSelfRel();
+            company.add(selfLink);
+//            if (orderService.getAllOrdersForCustomer(customerId).size() > 0) {
+//                Link ordersLink = linkTo(methodOn(CustomerController.class)
+//                        .getOrdersForCustomer(customerId)).withRel("allOrders");
+//                customer.add(ordersLink);
+//            }
+        }
+
+        Link link = linkTo(DsCompanyRestController.class).withSelfRel();
+        CollectionModel<DsCompany> result = new CollectionModel<>(allCompanies, link);
+        return result;
     }
 
     @GetMapping("/{id}")

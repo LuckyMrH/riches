@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sh.riches.dumbstock.entiities.dumbstock;
+package com.sh.riches.apiproviders.dumbstock.business_objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

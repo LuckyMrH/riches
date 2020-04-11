@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sh.riches.dumbstock;
+package com.sh.riches.apiproviders.dumbstock;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sh.riches.dumbstock.entiities.dumbstock.DsCompanyXferObject;
+import com.sh.riches.apiproviders.dumbstock.business_objects.DsCompanyXferObject;
 import com.sh.riches.entities.DsCompany;
 import com.sh.riches.repositories.DsCompanyRepository;
 import java.util.ArrayList;

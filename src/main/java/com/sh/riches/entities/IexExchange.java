@@ -5,19 +5,19 @@
  */
 package com.sh.riches.entities;
 
-import com.sh.riches.apiproviders.dumbstock.business_objects.DsCompanyXferObject;
+import com.sh.riches.apiproviders.iex.business_objects.IexExchangeXferObject;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.hateoas.RepresentationModel;
 
 /**
@@ -28,28 +28,27 @@ import org.springframework.hateoas.RepresentationModel;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(value = "api_ds_company")
+@Table(name = "api_iex_exchange")
 @Entity
-public class DsCompany extends RepresentationModel<DsCompany> implements Serializable {
+public class IexExchange extends RepresentationModel<DsCompany> implements Serializable {
 
     @Transient
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-
+    private Long id;
     @Column(unique = true)
-    String tickerSymbol;
-    String name;
-    boolean etf;
-    String exchange;
+    String exchange; //"exchange": "ADS",
+    String region; //"region": "AE",
+    String description; //"description": "Abu Dhabi Securities Exchange",
+    String marketId; // Market Identifier Cod"mic": "XADS"
+    String exchangeSuffix;
 
-    public DsCompany(DsCompanyXferObject xfer) {
-        tickerSymbol = xfer.getTicker();
-        name = xfer.getName();
-        etf = xfer.getEtf() == null ? false : xfer.getEtf().contains("true");
+    public IexExchange(IexExchangeXferObject xfer) {
         exchange = xfer.getExchange();
+        region = xfer.getRegion();
+        description = xfer.getDescription();
+        marketId = xfer.getDescription();
+        exchangeSuffix = xfer.getExchangeSuffix();
     }
-
 }

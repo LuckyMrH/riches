@@ -6,13 +6,13 @@
 package com.sh.riches.repositories;
 
 import com.sh.riches.entities.DsCompany;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author Steve
  */
-public interface DsCompanyRepository extends CrudRepository<DsCompany, Integer> {
+public interface DsCompanyRepository extends JpaRepository<DsCompany, Integer> {
 
     DsCompany findByName(String name);
 

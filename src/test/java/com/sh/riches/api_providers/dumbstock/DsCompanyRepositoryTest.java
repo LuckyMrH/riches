@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sh.riches.dumbstock;
+package com.sh.riches.api_providers.dumbstock;
 
-import com.sh.riches.dumbstock.entiities.dumbstock.DsCompanyXferObject;
+import com.sh.riches.apiproviders.dumbstock.business_objects.DsCompanyXferObject;
 import com.sh.riches.entities.DsCompany;
 import com.sh.riches.repositories.DsCompanyRepository;
 import static org.junit.Assert.assertEquals;
@@ -18,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,20 +29,29 @@ import org.springframework.test.context.junit4.SpringRunner;
  *
  * @author Steve
  */
+//@RunWith(SpringRunner.class)
+@TestInstance(Lifecycle.PER_CLASS)
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DsCompanyRepositoryIT {
+public class DsCompanyRepositoryTest {
 
     @Autowired
     private DsCompanyRepository companyRepository;
 
-    public DsCompanyRepositoryIT() {
+    public DsCompanyRepositoryTest() {
+        System.out.println("==================================================================================================================");
+        System.out.println("Test IexExchange DsCompanyRepositoryIT()!!!!");
+        System.out.println("==================================================================================================================");
+
     }
 
     @BeforeAll
     public void setUpClass() {
-        DsCompanyXferObject company1 = new DsCompanyXferObject("IBM", "International Business Machines", "true", "NASDAQ");
-        DsCompanyXferObject company2 = new DsCompanyXferObject("DELL", "Dell Technologies Inc.", "false", "NYSE");
+        System.out.println("==================================================================================================================");
+        System.out.println("Test DsCompanyRepositoryIT.setUpClass()!!!!");
+        System.out.println("==================================================================================================================");
+        DsCompanyXferObject company1 = new DsCompanyXferObject("IBM1", "International Business Machines", "true", "NASDAQ");
+        DsCompanyXferObject company2 = new DsCompanyXferObject("DELL1", "Dell Technologies Inc.", "false", "NYSE");
         //save eompany, verify has ID value after save
         DsCompany dsc1 = new DsCompany(company1);
         DsCompany dsc2 = new DsCompany(company2);
@@ -54,6 +65,12 @@ public class DsCompanyRepositoryIT {
 
     @AfterAll
     public void tearDownClass() {
+        DsCompany dsc1 = companyRepository.findByTickerSymbol("IBM1");
+        DsCompany dsc2 = companyRepository.findByTickerSymbol("DELL1");
+        assertNotNull(dsc1);
+        assertNotNull(dsc2);
+        companyRepository.delete(dsc1);
+        companyRepository.delete(dsc2);
     }
 
     @BeforeEach
@@ -67,11 +84,14 @@ public class DsCompanyRepositoryIT {
     @Test
     public void testFetchData() {
         /*Test data retrieval*/
+        System.out.println("==================================================================================================================");
+        System.out.println("Test Dumstock Repo!!!!");
+        System.out.println("==================================================================================================================");
         DsCompany companyA = companyRepository.findByName("International Business Machines");
         assertNotNull(companyA);
         assertTrue(companyA.isEtf());
-        assertEquals(companyA.getTickerSymbol(), "IBM");
-        DsCompany companyB = companyRepository.findByTickerSymbol("DELL");
+        assertEquals(companyA.getTickerSymbol(), "IBM1");
+        DsCompany companyB = companyRepository.findByTickerSymbol("DELL1");
         assertNotNull(companyB);
         assertEquals(companyB.getName(), "Dell Technologies Inc.");
         assertFalse(companyB.isEtf());
