@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sh.riches.controllers;
+package com.sh.riches.controller;
 
 import com.sh.riches.entities.DsCompany;
-import com.sh.riches.repositories.DsCompanyRepository;
+import com.sh.riches.repository.DsCompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Link;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkTo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,18 +31,8 @@ public class DsCompanyRestController {
 
     @Autowired
     DsCompanyRepository coRepo;
-
-//    @GetMapping("/list")
-//    public Resources<Resource<DsCompany>> list() {
-//        List<Resource<DsCompany>> companies = coRepo.findAll().stream()
-//                .map(company -> new Resource<>(company,
-//                linkTo(methodOn(DsCompanyRestController.class).one(company.getId())).withSelfRel(),
-//                linkTo(methodOn(DsCompanyRestController.class).all()).withRel("companies")))
-//                .collect(Collectors.toList());
-//
-//        return new Resources<>(companies,
-//                linkTo(methodOn(DsCompanyRestController.class).all()).withSelfRel());
-//    }
+    
+    
     @GetMapping(value = "/list", produces = {"application/hal+json"})
     public CollectionModel<DsCompany> getAllDsCompany() {
         Iterable<DsCompany> allCompanies = coRepo.findAll();

@@ -7,7 +7,8 @@ package com.sh.riches.api_providers.iex;
 
 import com.sh.riches.apiproviders.iex.business_objects.IexExchangeXferObject;
 import com.sh.riches.entities.IexExchange;
-import com.sh.riches.repositories.IexExchangeRepository;
+import com.sh.riches.repository.IexExchangeRepository;
+import com.sh.riches.util.TestUtil;
 import static org.junit.Assert.assertEquals;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -35,9 +36,7 @@ public class IexExchangeRepositoryTest {
     private IexExchangeRepository iexRepo;
 
     public IexExchangeRepositoryTest() {
-        System.out.println("==================================================================================================================");
-        System.out.println("Test IexExchange IexExchangeRepositoryIT()!!!!");
-        System.out.println("==================================================================================================================");
+        System.out.println(TestUtil.createTestTitle("IexExchangeRepositoryTest()"));
     }
 
     @BeforeAll
@@ -91,22 +90,22 @@ public class IexExchangeRepositoryTest {
         IexExchange ex2 = iexRepo.findByExchange("MEX1");
         IexExchange ex3 = iexRepo.findByExchange("ASE1");
         IexExchange ex4 = iexRepo.findByExchange("BATS1");
-        
+
         iexRepo.delete(ex1);
         iexRepo.delete(ex2);
         iexRepo.delete(ex3);
         iexRepo.delete(ex4);
-        
+
         IexExchange ex5 = iexRepo.findByExchange("NYS1");
         IexExchange ex6 = iexRepo.findByExchange("MEX1");
         IexExchange ex7 = iexRepo.findByExchange("ASE1");
         IexExchange ex8 = iexRepo.findByExchange("BATS1");
-        
+
         assertNull(ex5);
         assertNull(ex6);
         assertNull(ex7);
         assertNull(ex8);
-        
+
     }
 
     @BeforeEach
@@ -119,9 +118,7 @@ public class IexExchangeRepositoryTest {
 
     @Test
     public void testGetData() {
-        System.out.println("==================================================================================================================");
-        System.out.println("Test IexExchange Repo!!!!");
-        System.out.println("==================================================================================================================");
+        System.out.println(TestUtil.createTestTitle("IexExchangeRepositoryTest.testGetData()"));
 
         /*Test data retrieval*/
 //        exchange = xfer.getExchange();

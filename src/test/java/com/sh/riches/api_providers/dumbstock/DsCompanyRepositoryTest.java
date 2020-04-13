@@ -7,7 +7,9 @@ package com.sh.riches.api_providers.dumbstock;
 
 import com.sh.riches.apiproviders.dumbstock.business_objects.DsCompanyXferObject;
 import com.sh.riches.entities.DsCompany;
-import com.sh.riches.repositories.DsCompanyRepository;
+import com.sh.riches.repository.DsCompanyRepository;
+import com.sh.riches.util.TestUtil;
+import java.util.logging.Logger;
 import static org.junit.Assert.assertEquals;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -35,21 +37,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class DsCompanyRepositoryTest {
 
+    private static final Logger LOG = Logger.getLogger(DsCompanyRepositoryTest.class.getName());
+
     @Autowired
     private DsCompanyRepository companyRepository;
 
     public DsCompanyRepositoryTest() {
-        System.out.println("==================================================================================================================");
-        System.out.println("Test IexExchange DsCompanyRepositoryIT()!!!!");
-        System.out.println("==================================================================================================================");
+        System.out.println(TestUtil.createTestTitle("DsCompanyRepositoryIT()"));
 
     }
 
     @BeforeAll
     public void setUpClass() {
-        System.out.println("==================================================================================================================");
-        System.out.println("Test DsCompanyRepositoryIT.setUpClass()!!!!");
-        System.out.println("==================================================================================================================");
+        System.out.println(TestUtil.createTestTitle("DsCompanyRepositoryIT.setUpClass()"));
         DsCompanyXferObject company1 = new DsCompanyXferObject("IBM1", "International Business Machines", "true", "NASDAQ");
         DsCompanyXferObject company2 = new DsCompanyXferObject("DELL1", "Dell Technologies Inc.", "false", "NYSE");
         //save eompany, verify has ID value after save
@@ -82,11 +82,9 @@ public class DsCompanyRepositoryTest {
     }
 
     @Test
-    public void testFetchData() {
+    public void testDataRetrieval() {
         /*Test data retrieval*/
-        System.out.println("==================================================================================================================");
-        System.out.println("Test Dumstock Repo!!!!");
-        System.out.println("==================================================================================================================");
+        System.out.println(TestUtil.createTestTitle("DsCompanyRepositoryIT.testDataRetrieval()"));
         DsCompany companyA = companyRepository.findByName("International Business Machines");
         assertNotNull(companyA);
         assertTrue(companyA.isEtf());

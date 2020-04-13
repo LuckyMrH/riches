@@ -9,7 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sh.riches.apiproviders.iex.business_objects.IexExchangeXferObject;
 import com.sh.riches.entities.IexExchange;
-import com.sh.riches.repositories.IexExchangeRepository;
+import com.sh.riches.repository.IexExchangeRepository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +33,7 @@ import org.springframework.web.client.RestTemplate;
  * @author Steve
  */
 @RestController
-@RequestMapping("/iex")
+@RequestMapping("/api/iex")
 public class IexRestController {
 
     @Autowired
@@ -74,7 +74,8 @@ public class IexRestController {
         List<IexExchangeXferObject> exchanges = null;
         try {
             exchanges = Arrays.asList(mapper.readValue(resp, IexExchangeXferObject[].class));
-        } catch (JsonProcessingException ex) {
+        }
+        catch (JsonProcessingException ex) {
             Logger.getLogger(IexRestController.class.getName()).log(Level.SEVERE, null, ex);
         }
         res += "==================================================================================================================";
