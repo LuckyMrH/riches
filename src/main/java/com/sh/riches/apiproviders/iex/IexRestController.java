@@ -78,7 +78,7 @@ public class IexRestController {
         catch (JsonProcessingException ex) {
             Logger.getLogger(IexRestController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        res += "==================================================================================================================";
+        res = "==================================================================================================================";
         res += "Items retrieved from Iex Exchanges=" + exchanges.size();
         res += "==================================================================================================================";
         System.out.println(res);

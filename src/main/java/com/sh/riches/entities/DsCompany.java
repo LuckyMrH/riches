@@ -7,17 +7,16 @@ package com.sh.riches.entities;
 
 import com.sh.riches.apiproviders.dumbstock.business_objects.DsCompanyXferObject;
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.hateoas.RepresentationModel;
 
 /**
@@ -28,7 +27,10 @@ import org.springframework.hateoas.RepresentationModel;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(value = "api_ds_company")
+@Table(name = "api_ds_company"
+//        ,
+//        uniqueConstraints = @UniqueConstraint(name = "ticker_exchange_idx", columnNames = {"tickerSymbol", "exchange"})
+)
 @Entity
 public class DsCompany extends RepresentationModel<DsCompany> implements Serializable {
 
@@ -39,7 +41,6 @@ public class DsCompany extends RepresentationModel<DsCompany> implements Seriali
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Column(unique = true)
     String tickerSymbol;
     String name;
     boolean etf;

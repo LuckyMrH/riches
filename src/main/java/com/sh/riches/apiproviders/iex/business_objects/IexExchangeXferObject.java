@@ -1,6 +1,6 @@
 package com.sh.riches.apiproviders.iex.business_objects;
 
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +22,7 @@ public class IexExchangeXferObject {
     String exchange; //"exchange": "ADS",
     String region; //"region": "AE",
     String description; //"description": "Abu Dhabi Securities Exchange",
+    @JsonProperty("mic")
     String marketId; // Market Identifier Cod"mic": "XADS"
     String exchangeSuffix; //    "exchangeSuffix": "-DH"
 }
