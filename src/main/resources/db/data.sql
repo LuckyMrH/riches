@@ -1,0 +1,11 @@
+INSERT INTO api_ds_exchange (abbreviation, name, country) VALUES ('AMEX','NYSE American','US');
+INSERT INTO api_ds_exchange (abbreviation, name, country) VALUES ('ASX','Australian Securities Exchange','AU');
+INSERT INTO api_ds_exchange (abbreviation, name, country) VALUES ('BSE','Bombay Stock Exchange','IN');
+INSERT INTO api_ds_exchange (abbreviation, name, country) VALUES ('JPX','Japan Exchange Group','JP');
+INSERT INTO api_ds_exchange (abbreviation, name, country) VALUES ('NASDAQ','NASDAQ','US');
+INSERT INTO api_ds_exchange (abbreviation, name, country) VALUES ('NSE','National Stock Exchange of India','IN');
+INSERT INTO api_ds_exchange (abbreviation, name, country) VALUES ('NYSE','New York Stock Exchange','US');
+INSERT INTO api_ds_exchange (abbreviation, name, country) VALUES ('SWX','Six Swiss Exchange','CH');
+INSERT INTO api_ds_exchange (abbreviation, name, country) VALUES ('SZSE','Shenzhen Stock Exchange','CN');
+INSERT INTO api_ds_exchange (abbreviation, name, country) VALUES ('TSX','Toronto Stock Exchange','CA');
+INSERT INTO api_ds_exchange (abbreviation, name, country) VALUES ('TWSE','Taiwan Stock Exchange Corporation','TW');

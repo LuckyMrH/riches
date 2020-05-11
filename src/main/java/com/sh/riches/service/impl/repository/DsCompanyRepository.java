@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sh.riches.repository;
+package com.sh.riches.service.impl.repository;
 
-import com.sh.riches.entities.DsCompany;
+import com.sh.riches.service.impl.entity.DsCompany;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -17,5 +18,7 @@ public interface DsCompanyRepository extends JpaRepository<DsCompany, Integer> {
     DsCompany findByName(String name);
 
     DsCompany findByTickerSymbol(String tickerSymbol);
+
+    List<DsCompany> findByExchangeIn(List<String> exchangeList);
 
 }

@@ -3,21 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sh.riches.apiproviders.dumbstock.business_objects;
+package com.sh.riches.service.apiproviders.iex.business_objects;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ *
+ * @author Steve
+ */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class DsCompanyXferObject {
+@AllArgsConstructor
+public class IexEarningsTodayList {
 
-    String ticker;
-    String name;
-    @JsonProperty("is_etf")
-    String etf;
-    String exchange;
+    IexEarningsToday[] bto;
+    List<IexEarningsToday> amc;
+    List<IexEarningsToday> other;
+
 }

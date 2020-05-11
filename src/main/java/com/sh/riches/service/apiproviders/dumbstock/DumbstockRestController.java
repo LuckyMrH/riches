@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sh.riches.apiproviders.dumbstock;
+package com.sh.riches.service.apiproviders.dumbstock;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sh.riches.apiproviders.dumbstock.business_objects.DsCompanyXferObject;
-import com.sh.riches.entities.DsCompany;
-import com.sh.riches.repository.DsCompanyRepository;
+import com.sh.riches.service.apiproviders.dumbstock.business_objects.DsCompanyXferObject;
+import com.sh.riches.service.impl.entity.DsCompany;
+import com.sh.riches.service.impl.repository.DsCompanyRepository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,9 +42,10 @@ public class DumbstockRestController {
     @Autowired
     DsCompanyRepository coRepo;
 
-    @GetMapping()
-    public List<DsCompanyXferObject> list() {
-        return null;
+    @GetMapping(value = "/list", produces = {"application/json"})
+    public List<DsCompany> getAllDsCompanies() {
+        return coRepo.findAll();
+
     }
 
     @GetMapping("/{id}")

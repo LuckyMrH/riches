@@ -12,9 +12,9 @@ package com.sh.riches.util;
 public class TestUtil {
 
     public static String createTestTitle(String title) {
-        StringBuilder sb = new StringBuilder("==================================================================================================================");
-        sb.append("Test ").append(title).append("!!!!");
-        sb.append("==================================================================================================================");
+        StringBuilder sb = new StringBuilder("========== ");
+        sb.append("Test ").append(title);
+        sb.append("========== ");
         return sb.toString();
     }
 

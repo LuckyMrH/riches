@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sh.riches.repository;
+package com.sh.riches.service.impl.repository;
 
-import com.sh.riches.entities.IexExchange;
+import com.sh.riches.service.impl.entity.IexExchange;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

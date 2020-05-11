@@ -5,31 +5,29 @@
  */
 package com.sh.riches.api_providers.iex;
 
-import com.sh.riches.apiproviders.iex.business_objects.IexExchangeXferObject;
-import com.sh.riches.entities.IexExchange;
-import com.sh.riches.repository.IexExchangeRepository;
+import com.sh.riches.service.apiproviders.iex.business_objects.IexExchangeXferObject;
+import com.sh.riches.service.impl.entity.IexExchange;
+import com.sh.riches.service.impl.repository.IexExchangeRepository;
 import com.sh.riches.util.TestUtil;
-import static org.junit.Assert.assertEquals;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  *
  * @author Steve
  */
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@RunWith(SpringRunner.class)
 @SpringBootTest
+@TestInstance(Lifecycle.PER_CLASS)
 public class IexExchangeRepositoryTest {
 
     @Autowired
@@ -142,4 +140,5 @@ public class IexExchangeRepositoryTest {
         assertEquals("NYSE American", ex.getDescription());
 
     }
+
 }

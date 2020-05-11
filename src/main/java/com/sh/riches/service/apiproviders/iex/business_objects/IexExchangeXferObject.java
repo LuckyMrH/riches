@@ -1,4 +1,4 @@
-package com.sh.riches.apiproviders.iex.business_objects;
+package com.sh.riches.service.apiproviders.iex.business_objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

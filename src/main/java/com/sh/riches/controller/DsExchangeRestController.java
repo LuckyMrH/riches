@@ -5,9 +5,8 @@
  */
 package com.sh.riches.controller;
 
-import com.sh.riches.service.impl.entity.DsCompany;
-import com.sh.riches.service.impl.repository.DsCompanyRepository;
-import java.util.ArrayList;
+import com.sh.riches.service.impl.entity.DsExchange;
+import com.sh.riches.service.impl.repository.DsExchangeRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
@@ -30,36 +29,30 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping("/dscompany")
-public class DsCompanyRestController {
+@RequestMapping("/dsexchange")
+public class DsExchangeRestController {
 
     @Autowired
-    DsCompanyRepository coRepo;
-
-    @GetMapping(value = "/list", produces = {"application/json"})
-    public List<DsCompany> getDsCompanies() {
-        return coRepo.findAll();
-
-    }
+    DsExchangeRepository exchangeRepo;
 
     @GetMapping(value = "/list_us", produces = {"application/json"})
-    public List<DsCompany> getDsCompaniesUSexchanges() {
-        List<String> exchanges = new ArrayList<>();
-        exchanges.add("AMEX");
-        exchanges.add("NASDAQ");
-        exchanges.add("NYSE");
-        return coRepo.findByExchangeIn(exchanges);
+    public List<DsExchange> getDsExchangesUS() {
+        return exchangeRepo.findByCountry("US");
+    }
 
+    @GetMapping(value = "/list", produces = {"application/json"})
+    public List<DsExchange> getDsExchanges() {
+        return exchangeRepo.findAll();
     }
 
     @GetMapping(value = "/list_as_hal", produces = {"application/hal+json"})
-    public CollectionModel<DsCompany> getAllDsCompaniesAsHAL() {
-        Iterable<DsCompany> allCompanies = coRepo.findAll();
+    public CollectionModel<DsExchange> getAllDsCompaniesAsHAL() {
+        Iterable<DsExchange> allExchanges = exchangeRepo.findAll();
 
-        for (DsCompany company : allCompanies) {
-            String companyId = company.getId().toString();
-            Link selfLink = linkTo(DsCompanyRestController.class).slash(companyId).withSelfRel();
-            company.add(selfLink);
+        for (DsExchange exchange : allExchanges) {
+            String exchangeId = exchange.getId().toString();
+            Link selfLink = linkTo(DsExchangeRestController.class).slash(exchangeId).withSelfRel();
+            exchange.add(selfLink);
 //            if (orderService.getAllOrdersForCustomer(customerId).size() > 0) {
 //                Link ordersLink = linkTo(methodOn(CustomerController.class)
 //                        .getOrdersForCustomer(customerId)).withRel("allOrders");
@@ -67,8 +60,8 @@ public class DsCompanyRestController {
 //            }
         }
 
-        Link link = linkTo(DsCompanyRestController.class).withSelfRel();
-        CollectionModel<DsCompany> result = new CollectionModel<>(allCompanies, link);
+        Link link = linkTo(DsExchangeRestController.class).withSelfRel();
+        CollectionModel<DsExchange> result = new CollectionModel<>(allExchanges, link);
         return result;
     }
 
@@ -91,4 +84,5 @@ public class DsCompanyRestController {
     public ResponseEntity<?> delete(@PathVariable String id) {
         return null;
     }
+
 }

@@ -5,15 +5,14 @@
  */
 package com.sh.riches.api_providers.dumbstock;
 
-import com.sh.riches.apiproviders.dumbstock.business_objects.DsCompanyXferObject;
-import com.sh.riches.entities.DsCompany;
-import com.sh.riches.repository.DsCompanyRepository;
+import com.sh.riches.service.apiproviders.dumbstock.business_objects.DsCompanyXferObject;
+import com.sh.riches.service.impl.entity.DsCompany;
+import com.sh.riches.service.impl.repository.DsCompanyRepository;
 import com.sh.riches.util.TestUtil;
 import java.util.logging.Logger;
-import static org.junit.Assert.assertEquals;
-import org.junit.Rule;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -22,21 +21,15 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  *
  * @author Steve
  */
-//@RunWith(SpringRunner.class)
-@TestInstance(Lifecycle.PER_CLASS)
-@RunWith(SpringRunner.class)
 @SpringBootTest
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DsCompanyRepositoryTest {
 
     private static final Logger LOG = Logger.getLogger(DsCompanyRepositoryTest.class.getName());
@@ -103,9 +96,6 @@ public class DsCompanyRepositoryTest {
         }
         assertEquals(count, 2);
     }
-
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
 
 //    @Test
 //    public void testUniqueIndex() {

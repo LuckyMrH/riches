@@ -1,3 +1,13 @@
+nbactions.xml
+nbactions.tmp
+jshell.history
+nbactions-release-profile.xml  
+nbproject
+jshell.history
+nb-configuration.xml
+target
+
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar

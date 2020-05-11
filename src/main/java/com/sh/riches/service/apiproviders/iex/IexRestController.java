@@ -3,17 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sh.riches.apiproviders.iex;
+package com.sh.riches.service.apiproviders.iex;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sh.riches.apiproviders.iex.business_objects.IexExchangeXferObject;
-import com.sh.riches.entities.IexExchange;
-import com.sh.riches.repository.IexExchangeRepository;
+import com.sh.riches.service.apiproviders.iex.business_objects.IexEarningsTodayList;
+import com.sh.riches.service.apiproviders.iex.business_objects.IexExchangeXferObject;
+import com.sh.riches.service.impl.entity.IexExchange;
+import com.sh.riches.service.impl.repository.IexExchangeRepository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
+import static java.util.logging.Level.INFO;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -36,12 +38,20 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/api/iex")
 public class IexRestController {
 
+    private static final Logger LOG = Logger.getLogger(IexRestController.class.getName());
+//  before the open bto, after market close amc and during the trading day other
+    static final String IEX = "https://cloud.iexapis.com/";
+    static final String IEX_TOKEN = "?token=";
+    static final String IEX_MY_TOKEN = "pk_bc51e28277ce4fc0b3c0b1a261a98730";
+    static final String IEX_EARNINGS_TODAY_URI = "stable/stock/market/today-earnings";
+    static final String IEX_EXCHANGES_URI = "stable/ref-data/exchanges";
+
     @Autowired
     IexExchangeRepository ieExchangeRepo;
 
-    @GetMapping()
+    @GetMapping(value = "/list", produces = {"application/json"})
     public List<IexExchange> list() {
-        return null;
+        return ieExchangeRepo.findAll();
     }
 
     @GetMapping("/{id}")
@@ -64,10 +74,34 @@ public class IexRestController {
         return null;
     }
 
-    @GetMapping(value = "/fetch", produces = MediaType.TEXT_PLAIN_VALUE)
+    @GetMapping(value = "fetch_earnings_today", produces = MediaType.TEXT_PLAIN_VALUE)
+    public String fetchIexEarningsToday() {
+        String res = null;
+        String url = IEX + IEX_EARNINGS_TODAY_URI + IEX_TOKEN + IEX_MY_TOKEN;
+        LOG.log(INFO, "Fetching Iex Earnings Today from-" + url);
+        ObjectMapper mapper = new ObjectMapper();
+        RestTemplate restTemplate = new RestTemplate();
+        String resp = restTemplate.getForObject(url, String.class);
+        LOG.log(INFO, resp);
+        IexEarningsTodayList earningsToday = null;
+        try {
+            earningsToday = mapper.readValue(resp, IexEarningsTodayList.class);
+        }
+        catch (JsonProcessingException ex) {
+            Logger.getLogger(IexRestController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        res = "==================================================================================================================";
+        res += "Items retrieved from Iex Earnings Today =" + earningsToday.toString();
+        res += "==================================================================================================================";
+        LOG.log(INFO, resp);
+        LOG.log(INFO, "Fetched Earning Today:" + earningsToday.toString());
+        return res;
+    }
+
+    @GetMapping(value = "/fetch_exchanges", produces = MediaType.TEXT_PLAIN_VALUE)
     public String fetchIexExchangeListing() {
         String res = null;
-        String url = "https://cloud.iexapis.com/stable/ref-data/exchanges?token=pk_bc51e28277ce4fc0b3c0b1a261a98730";
+        String url = IEX + IEX_EXCHANGES_URI + IEX_TOKEN + IEX_MY_TOKEN;
         ObjectMapper mapper = new ObjectMapper();
         RestTemplate restTemplate = new RestTemplate();
         String resp = restTemplate.getForObject(url, String.class);
@@ -93,4 +127,5 @@ public class IexRestController {
         return res;
 
     }
+
 }

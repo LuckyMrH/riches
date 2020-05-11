@@ -280,4 +280,4 @@ ZA	South Africa	1974	.za	ISO 3166-2:ZA	Code taken from name in Dutch: Zuid-Afrik
 ZM	Zambia	1974	.zm	ISO 3166-2:ZM
 ZW	Zimbabwe	1980	.zw	ISO 3166-2:ZW	Name changed from Southern Rhodesia (RH)
  */
-package com.sh.riches.apiproviders.country_codes_iso3166;
+package com.sh.riches.service.apiproviders.country_codes_iso3166;

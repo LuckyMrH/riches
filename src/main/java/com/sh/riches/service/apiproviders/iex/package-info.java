@@ -29,4 +29,4 @@
  * string	Market Identifier Code using ISO 10383 exchangeSuffix	string	Exchange
  * Suffix to be added for symbols on that exchange I *
  */
-package com.sh.riches.apiproviders.iex;
+package com.sh.riches.service.apiproviders.iex;
